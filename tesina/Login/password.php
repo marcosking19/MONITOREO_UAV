@@ -1,5 +1,5 @@
 <?php
-require_once('conexion\db_connect.php');
+require_once('C:\AppServ\www\tesina\conexion\db_connect.php');
 
 $mensaje = "";
 $mensaje_error = "";
