@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - DroneShield</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0b3d91 0%, #1a73e8 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0b3d91;
+            margin-bottom: 1rem;
+        }
+        
+        .login-title {
+            color: #333;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+        
+        .login-button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .login-button:hover {
+            background-color: #0b3d91;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .options a {
+            color: #1a73e8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .options a:hover {
+            color: #0b3d91;
+            text-decoration: underline;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #0b3d91;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-button:hover {
+            background-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .security-info {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .input-error {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+        
+        .input-error.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Redirección corregida usando ruta relativa -->
+    <a href="../index.html" class="back-button">Volver al Inicio</a>
+    
+    <div class="login-container">
+        <div class="logo">DroneShield</div>
+        <h2 class="login-title">Acceso al Sistema de Firewall</h2>
+        
+        <form action="#" method="post" id="loginForm">
+            <div class="form-group">
+                <label for="uav-id">ID UAV</label>
+                <input type="text" id="uav-id" name="uav-id" placeholder="Ingresa el ID del UAV (máx. 8 caracteres)" maxlength="8" pattern="[a-zA-Z0-9]+" required>
+                <p class="input-error" id="uav-id-error">El ID UAV debe contener solo caracteres alfanuméricos (máx. 8).</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Nombre de Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Ingresa tu nombre de usuario" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+            </div>
+            
+            <button type="submit" class="login-button">Iniciar Sesión</button>
+            
+            <div class="options">
+                <a href="C:\AppServ\www\tesina\Login\password.html">¿Olvidaste tu contraseña?</a>
+                <a href="C:\AppServ\www\tesina\Login\create.html">Crear una cuenta</a>
+            </div>
+        </form>
+        
+        <div class="security-info">
+            <p>Tu conexión es segura. Todas las transmisiones están encriptadas.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const uavIdInput = document.getElementById('uav-id');
+            const uavIdError = document.getElementById('uav-id-error');
+            const loginForm = document.getElementById('loginForm');
+            
+            // Validar el campo ID UAV cuando el usuario escribe
+            uavIdInput.addEventListener('input', function() {
+                const value = this.value;
+                const isValid = /^[a-zA-Z0-9]*$/.test(value);
+                
+                if (!isValid) {
+                    uavIdError.classList.add('visible');
+                    this.setCustomValidity('Solo se permiten caracteres alfanuméricos');
+                } else {
+                    uavIdError.classList.remove('visible');
+                    this.setCustomValidity('');
+                }
+            });
+            
+            // Validar el formulario antes de enviar
+            loginForm.addEventListener('submit', function(event) {
+                const uavId = uavIdInput.value;
+                const isValid = /^[a-zA-Z0-9]{1,8}$/.test(uavId);
+                
+                if (!isValid) {
+                    event.preventDefault();
+                    uavIdError.classList.add('visible');
+                    uavIdInput.focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
